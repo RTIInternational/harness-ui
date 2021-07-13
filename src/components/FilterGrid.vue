@@ -1,0 +1,108 @@
+<template>
+  <div>
+    <div :class="'row datavue-ui-filtergrid-row ' + rowClass" v-for="(row, idx) in rows(this.filters)" :key="idx">
+      <div
+        :class="'datavue-ui-filtergrid-col col-sm-' + (12/columns) + ' ' + colClass"
+        v-for="(filter, filterKey) in row"
+        :key="page.key + '-' + filterKey"
+        :id="filter.key + '-col'"
+      >
+        <component
+          :is="filter.component"
+          v-bind="{filter, ...addProps(filter.props)}"
+          :key="page.key + '-filtergrid-' + filter.key"
+          :class="componentClass"
+        />
+      </div>
+    </div>
+    <div
+      class="row button-row datavue-ui-filtergrid-row datavue-ui-filtergrid-buttonrow"
+      v-if="(synchronous || clearButton) && buttonPosition !== 'none'"
+    >
+      <div :class="'col-md-12 text-' + buttonPosition">
+        <button
+          v-if="synchronous"
+          class="btn btn-primary btn-sm datavue-ui-filtergrid-applybutton"
+          @click="LOAD_DATA"
+          role="button"
+        >Apply Filters</button> &nbsp;
+        <button
+          v-if="clearButton"
+          role="button"
+          class="btn btn-primary btn-sm datavue-ui-filtergrid-clearbutton"
+          @click="initializeDefaultsLoadData"
+        >Clear Filters</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import rows from './mixins/rows'
+import inputProps from './mixins/inputProps'
+export default {
+  name: 'FilterGrid',
+  mixins: [rows, inputProps],
+  props: {
+    labelPosition: {
+      type: String,
+      required: false,
+      default: 'horizontal',
+      validator: function (value) {
+        return ['horizontal', 'vertical'].includes(value)
+      }
+    },
+    synchronous: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    clearButton: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    buttonPosition: {
+      type: String,
+      required: false,
+      default: 'center',
+      validator: function (value) {
+        return ['left', 'center', 'right', 'none'].includes(value)
+      }
+    }
+  },
+  methods: {
+    initializeDefaultsLoadData () {
+      this.INITIALIZE_DEFAULTS(
+        this.subset(this.filters)
+          ? Object.keys(this.subset(this.filters))
+          : null
+      )
+      if (!this.synchronous && this.page.retrieveData) {
+        this.LOAD_DATA()
+      }
+    },
+    addProps (props) {
+      if (!props) {
+        props = {}
+      }
+      const propKeys = Object.keys(props)
+      if (!propKeys.includes('synchronous')) {
+        props['synchronous'] = this.synchronous
+      }
+      if (!propKeys.includes('labelPosition')) {
+        props['labelPosition'] = this.labelPosition
+      }
+      if (!propKeys.includes('labelColumnSize')) {
+        props['labelColumnSize'] = this.labelColumnSize
+      }
+      return props
+    }
+  }
+}
+</script>
+<style scoped>
+.button-row {
+  margin-top: 10px;
+}
+</style>
