@@ -1,6 +1,6 @@
 <template>
-    <div v-if="validatedChartData && validatedChartData.length" :id="chart.key+'_data_table'" class="datavue-ui-datatable">
-        <table :class="'datavue-ui-table table ' + tableClass">
+    <div v-if="validatedChartData && validatedChartData.length" :id="chart.key+'_data_table'" class="harness-ui-datatable">
+        <table :class="'harness-ui-table table ' + tableClass">
             <thead :class="headerClass">
                 <tr>
                     <th
@@ -84,7 +84,7 @@ export default {
       if (chartData) {
         if (tableAdapter) {
           try {
-            return tableAdapter(this.chart, this.filters, chartData, this.dv)
+            return tableAdapter(this.chart, this.filters, chartData, this.hs)
           } catch (error) {
             throw String('There was an error in the formatted text from your tableAdapter function: ' + String(error))
           }
@@ -106,7 +106,7 @@ export default {
 .card {
     min-height: 100%;
 }
-.datavue-ui-table {
+.harness-ui-table {
     overflow: auto;
 }
 </style>

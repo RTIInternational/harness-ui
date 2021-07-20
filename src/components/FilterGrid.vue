@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div :class="'row datavue-ui-filtergrid-row ' + rowClass" v-for="(row, idx) in rows(this.filters)" :key="idx">
+    <div :class="'row harness-ui-filtergrid-row ' + rowClass" v-for="(row, idx) in rows(this.filters)" :key="idx">
       <div
-        :class="'datavue-ui-filtergrid-col col-sm-' + (12/columns) + ' ' + colClass"
+        :class="'harness-ui-filtergrid-col col-sm-' + (12/columns) + ' ' + colClass"
         v-for="(filter, filterKey) in row"
         :key="page.key + '-' + filterKey"
         :id="filter.key + '-col'"
@@ -16,20 +16,20 @@
       </div>
     </div>
     <div
-      class="row button-row datavue-ui-filtergrid-row datavue-ui-filtergrid-buttonrow"
+      class="row button-row harness-ui-filtergrid-row harness-ui-filtergrid-buttonrow"
       v-if="(synchronous || clearButton) && buttonPosition !== 'none'"
     >
       <div :class="'col-md-12 text-' + buttonPosition">
         <button
           v-if="synchronous"
-          class="btn btn-primary btn-sm datavue-ui-filtergrid-applybutton"
+          class="btn btn-primary btn-sm harness-ui-filtergrid-applybutton"
           @click="LOAD_DATA"
           role="button"
         >Apply Filters</button> &nbsp;
         <button
           v-if="clearButton"
           role="button"
-          class="btn btn-primary btn-sm datavue-ui-filtergrid-clearbutton"
+          class="btn btn-primary btn-sm harness-ui-filtergrid-clearbutton"
           @click="initializeDefaultsLoadData"
         >Clear Filters</button>
       </div>

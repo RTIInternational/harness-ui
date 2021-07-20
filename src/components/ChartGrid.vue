@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="'row datavue-ui-chartgrid-row ' + rowClass" v-for="(row, rowidx) in chartRows" :key="rowidx">
+    <div :class="'row harness-ui-chartgrid-row ' + rowClass" v-for="(row, rowidx) in chartRows" :key="rowidx">
       <div :class="'col-md-' + colSize(row) + ' ' + colClass" v-for="(chart, colidx) in row" :key="colidx">
         <component
           :is="chart.component"

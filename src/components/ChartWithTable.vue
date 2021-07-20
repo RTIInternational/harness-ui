@@ -1,10 +1,10 @@
 <template>
-  <div :id="chart.key+'_container'" :class="(card ? 'card': '') + ' datavue-ui-chartwithtable'">
+  <div :id="chart.key+'_container'" :class="(card ? 'card': '') + ' harness-ui-chartwithtable'">
     <div :class="card ? 'card-header': ''">
       <div class="row">
         <div :class="buttonPosition === 'top' ? 'col-md-6' : 'col-md-12'">
           <h3 :class="card ? 'card-title': ''">
-            <div class="datavue-ui-chartwithtable-title">
+            <div class="harness-ui-chartwithtable-title">
               <div>
                 <slot name="title" v-html="chart.title"></slot>
                 <button
@@ -17,14 +17,14 @@
                   aria-label="Toggle Chart"
                 >{{collapsed ? '+' : '-'}}</button>
               </div>
-              <div class="datavue-ui-chartwithtable-subtitle">
+              <div class="harness-ui-chartwithtable-subtitle">
                 <slot name="subtitle"></slot>
               </div>
             </div>
           </h3>
         </div>
         <div v-if="buttonPosition === 'top'" class="col-md-6">
-          <h3 :class="'datavue-ui-chartwithtable-buttonrow' + (card ? ' card-title': '')">
+          <h3 :class="'harness-ui-chartwithtable-buttonrow' + (card ? ' card-title': '')">
             <span id="button-container" class="float-right">
               <!-- dynamically change button to better enforce aria-labels -->
               <button
@@ -32,28 +32,28 @@
                 role="button"
                 :aria-label="'Show Table: ' + (chart.title || chart.key)"
                 @click="toggleView"
-                class="btn btn-sm btn-primary datavue-ui-togglebutton"
+                class="btn btn-sm btn-primary harness-ui-togglebutton"
               >Show Table</button>
               <button
                 v-if="tableDisplay == 'toggle' && view == 'table'"
                 role="button"
                 :aria-label="'Show Chart: ' + (chart.title || chart.key)"
                 @click="toggleView"
-                class="btn btn-sm btn-primary datavue-ui-togglebutton"
+                class="btn btn-sm btn-primary harness-ui-togglebutton"
               >Show Chart</button>
               <button
                 v-if="downloadable && getChartData(chart.key)"
                 role="button"
                 :aria-label="'Download Table: ' + (chart.title || chart.key)"
                 @click="downloadCSV(chart.key)"
-                class="btn btn-sm btn-primary datavue-ui-downloadbutton"
+                class="btn btn-sm btn-primary harness-ui-downloadbutton"
               >Download CSV</button>
               <button
                 v-if="saveImageButton && getChartData(chart.key)"
                 role="button"
                 :aria-label="'Download Table: ' + (chart.title || chart.key)"
                 @click="saveImageButton()"
-                class="btn btn-sm btn-primary datavue-ui-downloadbutton"
+                class="btn btn-sm btn-primary harness-ui-downloadbutton"
               >Save Image</button>
               <slot name="additional-buttons"></slot>
             </span>
@@ -61,8 +61,8 @@
         </div>
       </div>
     </div>
-    <div :id="chart.key+'ChartTableBody'" :class="'card-body datavue-ui-chartwithtable-body' + (collapsible ? ' ' + chart.key+'-multi-collapse': '') + (collapsed ? ' collapse': ' show' )">
-      <div class="datavue-ui-chartwithtable-abovechart">
+    <div :id="chart.key+'ChartTableBody'" :class="'card-body harness-ui-chartwithtable-body' + (collapsible ? ' ' + chart.key+'-multi-collapse': '') + (collapsed ? ' collapse': ' show' )">
+      <div class="harness-ui-chartwithtable-abovechart">
         <slot name="above-chart"></slot>
       </div>
 
@@ -73,7 +73,7 @@
         :key="'chartwithtable'+chart.key+'chart'"
       />
       <br />
-      <div class="datavue-ui-chartwithtable-belowchart">
+      <div class="harness-ui-chartwithtable-belowchart">
         <slot name="below-chart"></slot>
       </div>
       <DataTable508
@@ -85,7 +85,7 @@
     </div>
     <h3
       :id="chart.key+'Buttons'"
-      :class="'datavue-ui-chartwithtable-buttonrow' + (collapsible ? ' ' + chart.key+'-multi-collapse': '') + (collapsed ? ' collapse': ' show' ) + (card ? ' card-title': '')"
+      :class="'harness-ui-chartwithtable-buttonrow' + (collapsible ? ' ' + chart.key+'-multi-collapse': '') + (collapsed ? ' collapse': ' show' ) + (card ? ' card-title': '')"
       v-if="buttonPosition === 'bottom'"
     >
       <span id="button-container" class="float-right">
@@ -95,21 +95,21 @@
           role="button"
           :aria-label="'Show Table: ' + (chart.title || chart.key)"
           @click="toggleView"
-          class="btn btn-sm btn-primary datavue-ui-togglebutton"
+          class="btn btn-sm btn-primary harness-ui-togglebutton"
         >Show Table</button>
         <button
           v-if="tableDisplay == 'toggle' && view == 'table'"
           role="button"
           :aria-label="'Show Chart: ' + (chart.title || chart.key)"
           @click="toggleView"
-          class="btn btn-sm btn-primary datavue-ui-togglebutton"
+          class="btn btn-sm btn-primary harness-ui-togglebutton"
         >Show Chart</button>
         <span v-if="downloadable && getChartData(chart.key)">
           <button
             role="button"
             :aria-label="'Download Table: ' + (chart.title || chart.key)"
             @click="downloadCSV(chart.key, labels || null)"
-            class="btn btn-sm btn-primary datavue-ui-downloadbutton"
+            class="btn btn-sm btn-primary harness-ui-downloadbutton"
           >Download CSV</button>
         </span>
         <span v-if="saveImageButton && getChartData(chart.key)">
@@ -118,7 +118,7 @@
             role="button"
             :aria-label="'Download Image: ' + (chart.title || chart.key)"
             @click="saveImageButton()"
-            class="btn btn-sm btn-primary datavue-ui-downloadbutton"
+            class="btn btn-sm btn-primary harness-ui-downloadbutton"
           >Save Image</button>
         </span>
         <slot name="additional-buttons"></slot>

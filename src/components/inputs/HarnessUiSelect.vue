@@ -5,7 +5,7 @@
         <div :class="'col-'+labelColumnSize">
           <label
             :for="filter.key"
-            :class="'col-form-label datavue-ui-select-label datavue-ui-select-label-horizontal ' + (isFilterDirty(filter.key) ? 'dirty-filter-label' : '')"
+            :class="'col-form-label harness-ui-select-label harness-ui-select-label-horizontal ' + (isFilterDirty(filter.key) ? 'dirty-filter-label' : '')"
             :id="filter.key+'-label'"
             v-html="filter.label"
           />
@@ -13,7 +13,7 @@
         <div :class="'col-'+(12 - labelColumnSize)">
           <select
             :multiple="multiple"
-            :class="'form-control datavue-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
+            :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
             v-model="boundValue"
             :id="filter.key+'-select'"
             :aria-labelledby="filter.key + '-label'"
@@ -26,20 +26,20 @@
               v-html="option.label"
             />
           </select>
-          <small v-if="helperText" v-html="helperText" :class="'form-text datavue-ui-select-helper-text datavue-ui-helper-text ' + helperTextClass"></small>
+          <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
         </div>
       </div>
     </div>
     <div v-if="labelPosition == 'vertical'" :class="(isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
       <label
         :for="filter.key"
-        :class="'col-form-label datavue-ui-select-label datavue-ui-select-label-vertical ' + (isFilterDirty(filter.key) ? 'dirty-filter-label' : '')"
+        :class="'col-form-label harness-ui-select-label harness-ui-select-label-vertical ' + (isFilterDirty(filter.key) ? 'dirty-filter-label' : '')"
         :id="filter.key+'-label'"
         v-html="filter.label"
       />
       <select
         :multiple="multiple"
-        :class="'form-control datavue-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
+        :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
         v-model="boundValue"
         :id="filter.key+'-select'"
         :aria-labelledby="filter.key + '-label'"
@@ -52,12 +52,12 @@
           v-html="option.label"
         />
       </select>
-      <small v-if="helperText" v-html="helperText" :class="'form-text datavue-ui-select-helper-text datavue-ui-helper-text ' + helperTextClass"></small>
+      <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
     </div>
     <div v-if="labelPosition == 'none'" :class="'form-inline ' + (isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
       <select
         :multiple="multiple"
-        :class="'form-control datavue-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
+        :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
         v-model="boundValue"
         :id="filter.key+'-select'"
         :aria-label="filter.label"
@@ -70,7 +70,7 @@
           v-html="option.label"
         />
       </select>
-      <small v-if="helperText" v-html="helperText" :class="'form-text datavue-ui-select-helper-text datavue-ui-helper-text ' + helperTextClass"></small>
+      <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
     </div>
   </div>
 </template>
@@ -78,7 +78,7 @@
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
 export default {
-  name: 'datavue-ui-select',
+  name: 'harness-ui-select',
   mixins: [inputProps, inputFilter],
   props: {
     multiple: {

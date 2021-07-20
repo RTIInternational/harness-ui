@@ -1,18 +1,15 @@
 {
-  "name": "@datavue/datavue-ui",
-  "author": {
-    "name": "RTI CDS",
-    "email": "alexharding@rti.org"
-  },
+  "name": "@rtidatascience/harness-ui",
+  "author": "RTI CDS <alexharding@rti.org>",
   "version": "1.7.14",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name datavue-ui ./src/datavue-ui.js",
+    "build-bundle": "vue-cli-service build --target lib --name harness-ui ./src/harness-ui.js",
     "test:unit": "vue-cli-service test:unit"
   },
-  "main": "./dist/datavue-ui.common.js",
+  "main": "./dist/harness-ui.common.js",
   "files": [
     "dist/*",
     "src/*",
@@ -21,6 +18,7 @@
   ],
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@rtidatascience/harness": "^1.16.3",
     "bootstrap": "^4.3.1",
     "file-saver": "^2.0.2",
     "jquery": "^3.4.1",
@@ -66,5 +64,18 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "description": "[![pipeline status](https://cds-mallard-web.rti.org/harness/harness-ui/badges/master/pipeline.svg)](https://cds-mallard-web.rti.org/harness/harness-ui/-/commits/master) ## The Harness Component Library Harness-UI is a Vue Plugin that publishes a library of components binding [Harness]() functionality to [Bootstrap 4 components](https://getbootstrap.com/docs/4.0/components/). Harness-UI contains reusable, configurable, accessible form fields bound to Harness filters, convenience layout functionality for filters and charts, and accessible datatables.",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RTIInternational/harness-ui.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RTIInternational/harness-ui/issues"
+  },
+  "homepage": "https://github.com/RTIInternational/harness-ui#readme"
 }

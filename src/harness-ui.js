@@ -1,6 +1,6 @@
 import components from './manifest'
 
-export const datavueUI = {
+export const harnessUI = {
   // eslint-disable-next-line
     install(Vue, options) {
     // // globally register components

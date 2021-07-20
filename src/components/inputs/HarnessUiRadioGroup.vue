@@ -2,7 +2,7 @@
   <div>
     <fieldset v-if="labelPosition === 'vertical'">
       <legend
-        class="col-form-label datavue-ui-radiogroup-legend"
+        class="col-form-label harness-ui-radiogroup-legend"
         :for="filter.key"
         v-html="filter.label"
       />
@@ -22,20 +22,20 @@
           :aria-labelledby="filter.key + option.key + '-label'"
         />
         <label
-          class="form-check-label datavue-ui-radiogroup-label"
+          class="form-check-label harness-ui-radiogroup-label"
           :id="filter.key + option.key + '-label'"
           :for="filter.key + option.key"
           :disabled="option.disabled"
           v-html="option.label"
         />
       </div>
-      <small v-if="helperText" v-html="helperText" :class="'form-text datavue-ui-helper-text datavue-ui-radiogroup-helper-text ' + helperTextClass"></small>
+      <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-helper-text harness-ui-radiogroup-helper-text ' + helperTextClass"></small>
     </fieldset>
     <fieldset v-if="labelPosition === 'horizontal'">
       <div class="row form-row">
         <div :class="'col-'+labelColumnSize">
           <legend
-            class="col-form-label datavue-ui-radiogroup-legend"
+            class="col-form-label harness-ui-radiogroup-legend"
             :for="filter.key"
             v-html="filter.label"
           />
@@ -57,14 +57,14 @@
               :aria-labelledby="filter.key + option.key + '-label'"
             />
             <label
-              class="form-check-label datavue-ui-radiogroup-label"
+              class="form-check-label harness-ui-radiogroup-label"
               :id="filter.key + option.key + '-label'"
               :for="filter.key + option.key"
               :disabled="option.disabled"
               v-html="option.label"
             />
           </div>
-          <small v-if="helperText" v-html="helperText" :class="'form-text datavue-ui-helper-text datavue-ui-radiogroup-helper-text ' + helperTextClass"></small>
+          <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-helper-text harness-ui-radiogroup-helper-text ' + helperTextClass"></small>
         </div>
       </div>
     </fieldset>
@@ -74,7 +74,7 @@
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
 export default {
-  name: 'datavue-ui-radiogroup',
+  name: 'harness-ui-radiogroup',
   mixins: [inputProps, inputFilter],
   props: {
     inline: {
