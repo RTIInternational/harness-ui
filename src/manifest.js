@@ -4,6 +4,7 @@ import ChartGrid from './components/ChartGrid'
 import GridWithFilters from './components/GridWithFilters'
 import DataTable508 from './components/DataTable508'
 import ChartWithTable from './components/ChartWithTable'
+import FilterPicker from './components/FilterPicker'
 import HarnessUiInput from './components/inputs/HarnessUiInput'
 import HarnessUiSelect from './components/inputs/HarnessUiSelect'
 import HarnessUiRadioGroup from './components/inputs/HarnessUiRadioGroup'
@@ -16,6 +17,7 @@ const components = {
   GridWithFilters,
   DataTable508,
   ChartWithTable,
+  FilterPicker,
   HarnessUiInput,
   HarnessUiSelect,
   HarnessUiRadioGroup,
