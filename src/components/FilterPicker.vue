@@ -21,7 +21,7 @@
               </option>
             </select>
           </div>
-          <div class="col text-center">
+          <div class="col">
             <slot class="harness-ui-filterpicker-label">Remove Filter</slot>
             <select
               class="form-control harness-ui-filterpicker-select"
