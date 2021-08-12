@@ -121,15 +121,27 @@ export default {
     'numRowOptions': {
       type: Array,
       required: true
+    },
+    'defaultSortColumn': {
+      type: String,
+      required: true
+    },
+    'defaultSortOrder': {
+      type: String,
+      required: false,
+      default: 'asc',
+      validator: function (value) {
+        return ['asc', 'desc'].includes(value)
+      }
     }
   },
   data () {
     return {
-      sortedDescending: true,
+      sortedDescending: this.defaultSortOrder === 'desc',
       pageNumber: 1,
       searchQuery: '',
-      columnSelector: 'Transformed key',
-      columnSort: 'desc',
+      columnSelector: this.defaultSortColumn,
+      columnSort: this.defaultSortOrder,
       paginationAmount: 5
     }
   },
