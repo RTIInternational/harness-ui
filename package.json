@@ -1,7 +1,7 @@
 {
   "name": "@rtidatascience/harness-ui",
   "author": "RTI CDS <alexharding@rti.org>",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@rtidatascience/harness": "^1.16.3",
+    "@rtidatascience/harness": "^1.17.1",
     "bootstrap": "^4.3.1",
     "file-saver": "^2.0.2",
     "jquery": "^3.4.1",
