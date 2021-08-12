@@ -6,7 +6,7 @@
           <div class="row form-row">
             <div class="offset-1 col-4">
               <select
-                class="form-control harness-ui-select"
+                class="form-control harness-ui-interactivetable-select"
                 :id="chart.key + 'NumRowsSelect'"
                 aria-label="Amount of rows to paginate by"
                 v-model="paginationAmount"
@@ -27,7 +27,7 @@
             <div class="offset-4 col-8 pr-4">
               <input
                 type="text"
-                class="form-control harness-ui-text-input"
+                class="form-control harness-ui-interactivetable-text-input"
                 :id="chart.key + 'SearchQueryInput'"
                 aria-label="Table search"
                 v-model="searchText"
@@ -37,8 +37,8 @@
           </div>
         </div>
       </div>
-      <div v-if="validatedChartData && validatedChartData.length" :id="chart.key+'_data_table'" class="harness-ui-datatable">
-        <table :class="'harness-ui-table table ' + tableClass">
+      <div v-if="validatedChartData && validatedChartData.length" :id="chart.key+'_data_table'" class="harness-ui-interactivetable-datatable">
+        <table :class="'harness-ui-interactivetable-table table ' + tableClass">
           <thead :class="headerClass">
             <tr>
               <th
@@ -86,13 +86,13 @@
       <div class="col-md-2 text-center">
         <nav
           aria-label="Table pagination navigation"
-          class="navigation text-center"
+          class="navigation text-center harness-ui-interactivetable-pagination-navigation"
         >
-          <ul class="pagination">
+          <ul class="pagination harness-ui-interactivetable-pagination">
             <li
               v-for="index in numberOfPages"
               :key="index"
-              :class="['page-item', index === pageNumber ? ' active' : '']"
+              :class="['page-item', 'harness-ui-interactivetable-pagination-pageitem', index === pageNumber ? ' active' : '']"
             >
               <a
                 :class="'page-link'"
