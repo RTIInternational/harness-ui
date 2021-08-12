@@ -248,13 +248,22 @@ export default {
       return filteredData
     },
     isSearchable () {
-      return !this.local.hasOwnProperty('search') || (this.local.hasOwnProperty('search') && this.local.search !== false)
+      if (this.local) {
+        return !this.local.hasOwnProperty('search') || (this.local.hasOwnProperty('search') && this.local.search !== false)
+      }
+      return true
     },
     isSortable () {
-      return !this.local.hasOwnProperty('sort') || (this.local.hasOwnProperty('sort') && this.local.sort !== false)
+      if (this.local) {
+        return !this.local.hasOwnProperty('sort') || (this.local.hasOwnProperty('sort') && this.local.sort !== false)
+      }
+      return true
     },
     isPaginated () {
-      return !this.local.hasOwnProperty('paginate') || (this.local.hasOwnProperty('paginate') && this.local.paginate !== false)
+      if (this.local) {
+        return !this.local.hasOwnProperty('paginate') || (this.local.hasOwnProperty('paginate') && this.local.paginate !== false)
+      }
+      return true
     },
     numberOfPages () {
       let filteredData = this.tableAdaptedData
