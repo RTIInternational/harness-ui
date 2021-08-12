@@ -167,13 +167,12 @@ export default {
   },
   methods: {
     setColumnFilter (columnName) {
-      let tableOptions = this.getOptionsForFilter(this.chart.key + 'TableOptions')
       if (columnName === this.columnSelector) {
         this.sortedDescending = !this.sortedDescending
       }
       this.columnSelector = columnName
       this.columnSort = this.sortedDescending ? 'desc' : 'asc'
-      if (tableOptions) {
+      if (this.tableOptions) {
         this.setOptionsForFilter(this.chart.key + 'TableOptions', [{
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
@@ -188,9 +187,8 @@ export default {
       }
     },
     setPageNum (index) {
-      let tableOptions = this.getOptionsForFilter(this.chart.key + 'TableOptions')
       this.pageNumber = index
-      if (tableOptions) {
+      if (this.tableOptions) {
         this.setFilter(this.chart.key + 'TableOptions', {
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
@@ -212,6 +210,9 @@ export default {
     }
   },
   computed: {
+    tableOptions () {
+      return this.getOptionsForFilter(this.chart.key + 'TableOptions') || []
+    },
     columnHeaders () {
       return this.validatedChartData ? Object.keys(this.validatedChartData[0]) : []
     },
@@ -311,10 +312,9 @@ export default {
         return this.searchQuery
       },
       set (value) {
-        let tableOptions = this.getOptionsForFilter(this.chart.key + 'TableOptions')
         this.searchQuery = value
         this.pageNumber = 1
-        if (tableOptions) {
+        if (this.tableOptions) {
           this.setFilter(this.chart.key + 'TableOptions', {
             'pageNumber': this.pageNumber,
             'searchQuery': this.searchQuery,
@@ -333,8 +333,7 @@ export default {
   beforeUpdate () {
     if (this.pageNumber > this.numberOfPages.length) {
       this.pageNumber = 1
-      let tableOptions = this.getOptionsForFilter(this.chart.key + 'TableOptions')
-      if (tableOptions) {
+      if (this.tableOptions) {
         this.setFilter(this.chart.key + 'TableOptions', {
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
