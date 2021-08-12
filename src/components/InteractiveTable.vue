@@ -45,10 +45,10 @@
                 v-for="(column, idx) in columnHeaders"
                 scope="col"
                 :key="idx"
-                :class="labelClass"
+                :class="'table-header ' + labelClass"
                 @click="setColumnFilter(column)"
               >
-                {{ column }}
+                <button class="harness-ui-interactivetable-column-header">{{ column }}</button>
                 <span
                   v-if="isActiveAndDescending(column)"
                   :class="['activeCol']"
@@ -94,12 +94,12 @@
               :key="index"
               :class="['page-item', 'harness-ui-interactivetable-pagination-pageitem', index === pageNumber ? ' active' : '']"
             >
-              <a
+              <button
                 :class="'page-link'"
                 @click="setPageNum(index)"
               >
                 {{ index }}
-              </a>
+              </button>
             </li>
           </ul>
         </nav>
@@ -322,3 +322,13 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .harness-ui-interactivetable-column-header {
+    background-color: inherit;
+    border: none;
+  }
+  .harness-ui-interactivetable-column-header:focus, .harness-ui-interactivetable-column-header:hover {
+    outline: none;
+    border-bottom: 2px solid gray;
+  }
+</style>
