@@ -153,7 +153,7 @@ export default {
       this.columnSelector = columnName
       this.columnSort = this.sortedDescending ? 'desc' : 'asc'
       if (this.tableOptions) {
-        this.setOptionsForFilter(this.chart.key + 'TableOptions', [{
+        this.setFilter(this.chart.key + 'TableOptions', [{
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
           'columnSelector': this.columnSelector,
