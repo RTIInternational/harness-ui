@@ -108,43 +108,11 @@
   </div>
 </template>
 <script>
+import tables from './mixins/tables'
 export default {
   name: 'InteractiveTable',
+  mixins: [tables],
   props: {
-    'chart': {
-      type: Object,
-      required: true
-    },
-    'tableClass': {
-      type: String,
-      required: false,
-      default: null
-    },
-    'headerClass': {
-      type: String,
-      required: false,
-      default: null
-    },
-    'labelClass': {
-      type: String,
-      required: false,
-      default: null
-    },
-    'rowClass': {
-      type: String,
-      required: false,
-      default: null
-    },
-    'cellClass': {
-      type: String,
-      required: false,
-      default: null
-    },
-    'rowHeaderCol': {
-      type: Boolean,
-      required: false,
-      default: false
-    },
     'local': {
       type: Object,
       required: false,
@@ -213,9 +181,6 @@ export default {
     tableOptions () {
       return this.getOptionsForFilter(this.chart.key + 'TableOptions') || []
     },
-    columnHeaders () {
-      return this.validatedChartData ? Object.keys(this.validatedChartData[0]) : []
-    },
     tableAdaptedData () {
       let filteredData = this.getChartData(this.chart.key) || null
       let tableAdapter = this.getChartProps(this.chart.key).tableAdapter || null
@@ -269,9 +234,6 @@ export default {
         return filteredData
       }
       return filteredData
-    },
-    validatedChartData () {
-      return this.validateChartData(this.chartData, this.chart.key)
     },
     isSearchable () {
       return !this.local.hasOwnProperty('search') || (this.local.hasOwnProperty('search') && this.local.search !== false)
