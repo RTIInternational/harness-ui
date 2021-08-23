@@ -49,7 +49,7 @@ export default {
       required: false,
       default: 'horizontal',
       validator: function (value) {
-        return ['horizontal', 'vertical'].includes(value)
+        return ['horizontal', 'vertical', 'none'].includes(value)
       }
     },
     synchronous: {
