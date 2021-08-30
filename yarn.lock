@@ -748,10 +748,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@rtidatascience/harness@^1.16.3":
-  version "1.16.3"
-  resolved "https://registry.yarnpkg.com/@rtidatascience/harness/-/harness-1.16.3.tgz#f744bb8c6946217cdb47f618c8fa42bde6c65b9c"
-  integrity sha512-NWz8YBxGy1RMWOvdbIZBe1/DLFK/xQVZSauCHwV3dmf6DLntKqugzAhe7ujr3UuKjrc53pV1qyNLNVKHx5v3IQ==
+"@rtidatascience/harness@^1.17.1":
+  version "1.17.2"
+  resolved "https://registry.yarnpkg.com/@rtidatascience/harness/-/harness-1.17.2.tgz#a4af034ccefa310295dc8b8953016386c2e7e1a2"
+  integrity sha512-G48FQpIuv9WX2bVIKg6UmhUCjnztvTS30DZpS9X7rpJuEzWIHPIN9kBLHkZw2qbQfiW/ZTGZXfLOMO8WU0tzKw==
   dependencies:
     file-saver "^2.0.2"
     vue "^2.6.10"
