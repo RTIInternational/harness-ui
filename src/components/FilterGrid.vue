@@ -9,7 +9,7 @@
       >
         <component
           :is="filter.component"
-          v-bind="{filter, ...addProps(filter.props)}"
+          v-bind="{filter, ...filter.props, ...$props, ...$attrs}"
           :key="page.key + '-filtergrid-' + filter.key"
           :class="componentClass"
         />
@@ -81,22 +81,6 @@ export default {
       if (!this.synchronous && this.page.retrieveData) {
         this.LOAD_DATA()
       }
-    },
-    addProps (props) {
-      if (!props) {
-        props = {}
-      }
-      const propKeys = Object.keys(props)
-      if (!propKeys.includes('synchronous')) {
-        props['synchronous'] = this.synchronous
-      }
-      if (!propKeys.includes('labelPosition')) {
-        props['labelPosition'] = this.labelPosition
-      }
-      if (!propKeys.includes('labelColumnSize')) {
-        props['labelColumnSize'] = this.labelColumnSize
-      }
-      return props
     }
   }
 }

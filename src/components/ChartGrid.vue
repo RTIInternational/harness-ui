@@ -4,7 +4,7 @@
       <div :class="'col-md-' + colSize(row) + ' ' + colClass" v-for="(chart, colidx) in row" :key="colidx">
         <component
           :is="chart.component"
-          v-bind="{chart, ...chart.props, ...$attrs}"
+          v-bind="{chart, ...chart.props, ...$props, ...$attrs}"
           :key="page.key + '-chartgrid-'+chart.key"
           :class="componentClass"
         />
