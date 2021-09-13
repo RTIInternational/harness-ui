@@ -20,8 +20,8 @@
           aria-expanded="false"
           aria-label="Collapse Toggle"
         >
-          <i class="fas fa-angle-down" v-if="collapse && collapsed"></i>
-          <i class="fas fa-angle-up" v-if="collapse && !collapsed"></i>
+          <i class="bi-chevron-down" v-if="collapse && collapsed"></i>
+          <i class="bi-chevron-up" v-if="collapse && !collapsed"></i>
         </button>
       </legend>
       <div
@@ -89,8 +89,8 @@
               aria-expanded="false"
               aria-label="Collapse Toggle"
             >
-              <i class="fas fa-angle-down" v-if="collapse && collapsed"></i>
-              <i class="fas fa-angle-up" v-if="collapse && !collapsed"></i>
+              <i class="bi-chevron-down" v-if="collapse && collapsed"></i>
+              <i class="bi-chevron-up" v-if="collapse && !collapsed"></i>
             </button>
           </legend>
         </div>
