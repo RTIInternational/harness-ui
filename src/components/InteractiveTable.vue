@@ -90,7 +90,19 @@
         >
           <ul class="pagination harness-ui-interactivetable-pagination">
             <li
-              v-for="index in numberOfPages"
+              :class="`page-link ${pageNumber <= 1 ? 'disabled': ''}`"
+              @click="setPageNum(1)"
+              >
+                <i class="bi-chevron-double-left"></i>
+            </li>
+            <li
+            :class="`page-link ${pageNumber <= 1 ? 'disabled': ''}`"
+            @click="pageNumber != 1 ? setPageNum(pageNumber - 1) : ''"
+            >
+              <i class="bi-chevron-left"></i>
+            </li>
+            <li
+              v-for="index in paginationOptions"
               :key="index"
               :class="['page-item', 'harness-ui-interactivetable-pagination-pageitem', index === pageNumber ? ' active' : '']"
             >
@@ -100,6 +112,18 @@
               >
                 {{ index }}
               </button>
+            </li>
+            <li
+            :class="`page-link ${pageNumber <= 1 ? 'disabled': ''}`"
+            @click="pageNumber < numberOfPages.length ? setPageNum(pageNumber + 1) : ''"
+            >
+              <i class="bi-chevron-right"></i>
+            </li>
+            <li
+              :class="`page-link ${pageNumber <= 1 ? 'disabled': ''}`"
+              @click="setPageNum(numberOfPages.length)"
+              >
+                <i class="bi-chevron-double-right"></i>
             </li>
           </ul>
         </nav>
@@ -133,6 +157,11 @@ export default {
       validator: function (value) {
         return ['asc', 'desc'].includes(value)
       }
+    },
+    'numPaginationOptions': {
+      type: Number,
+      required: false,
+      default: 5
     }
   },
   data () {
@@ -310,6 +339,13 @@ export default {
         if (!this.isSearchable || !this.isSortable || !this.isPaginated) {
           this.LOAD_DATA()
         }
+      }
+    },
+    paginationOptions () {
+      if (this.pageNumber <= this.numPaginationOptions) {
+        return this.numberOfPages.slice(0, (this.numPaginationOptions))
+      } else {
+        return this.numberOfPages.slice(this.pageNumber - this.numPaginationOptions, this.pageNumber)
       }
     }
   },
