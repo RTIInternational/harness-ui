@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{getFilter(this.filter.key)}}
     <div v-if="labelPosition == 'horizontal'" :class="(isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
       <div class="row form-row">
         <div :class="'col-'+labelColumnSize + ' ' + (isFilterDirty(filter.key) ? 'dirty-filter-label-wrapper' : '')">
@@ -11,13 +12,7 @@
           />
         </div>
         <div :class="'col-'+(12 - labelColumnSize) + ' ' + (isFilterDirty(filter.key) ? 'dirty-filter-input-wrapper' : '')">
-          <input
-          :type="type"
-          :class="'form-control harness-ui-' + type + '-input ' + (isFilterDirty(filter.key) ? 'dirty-filter-input' : '')"
-          v-model="boundValue"
-          :id="filter.key+'-'+type+'-input'"
-          :aria-labelledby="filter.key + '-label'"
-          />
+          <InputPartial v-bind="{...$props, ...$attrs, strictError}" />
           <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-helper-text harness-ui-input-helper-text ' + helperTextClass"></small>
         </div>
       </div>
@@ -29,23 +24,11 @@
         :id="filter.key+'-label'"
         v-html="filter.label"
       />
-      <input
-          :type="type"
-          :class="'form-control harness-ui-' + type + '-input ' + (isFilterDirty(filter.key) ? 'dirty-filter-input' : '')"
-          v-model="boundValue"
-          :id="filter.key+'-'+type+'-input'"
-          :aria-labelledby="filter.key + '-label'"
-      />
+      <InputPartial v-bind="{...$props, ...$attrs, strictError}" />
       <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-helper-text harness-ui-input-helper-text ' + helperTextClass"></small>
     </div>
     <div v-if="labelPosition == 'none'" :class="'form-inline ' + (isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
-      <input
-        :type="type"
-        :class="'form-control harness-ui-' + type + '-input ' + (isFilterDirty(filter.key) ? 'dirty-filter-input' : '')"
-        v-model="boundValue"
-        :id="filter.key+'-'+type+'-input'"
-        :aria-label="filter.label"
-      />
+      <InputPartial v-bind="{...$props, ...$attrs, strictError}" />
       <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-helper-text harness-ui-input-helper-text ' + helperTextClass"></small>
     </div>
   </div>
@@ -53,9 +36,13 @@
 <script>
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
+import InputPartial from './partials/InputPartial'
+import $ from 'jquery'
+import Bloodhound from 'corejs-typeahead'
 export default {
   name: 'harness-ui-input',
   mixins: [inputProps, inputFilter],
+  components: { InputPartial },
   props: {
     type: {
       required: false,
@@ -78,6 +65,89 @@ export default {
         ]
         return validOptions.includes(value)
       }
+    },
+    typeahead: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    strict: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  data () {
+    return {
+      bloodhound: null,
+      subscription: null,
+      strictError: false
+    }
+  },
+  computed: {
+    boundValue: {
+      get () {
+        return this.getFilter(this.filter.key)
+      },
+      set (value) {
+        // if strict is enabled, only allow options that are in the list
+        if (!this.strict || this.evaluateStrict) {
+          this.strictError = false
+          this.setFilterLoadData(this.filter.key, value)
+        } else if (this.strict && !this.evaluateStrict) {
+          this.strictError = true
+        }
+      }
+    }
+  },
+  methods: {
+    evaluateStrict (val) {
+      return this.getOptionsForFilter(this.filter.key).map(f => f.key).includes(val)
+    },
+    initTypeahead () {
+      // create Bloodhound instance with flattened/tokenized list of option labels
+      this.bloodhound = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: this.getOptionsForFilter(this.filter.key).map(f => f.key)
+      })
+      // instantiate typeahead
+      $(`#${this.filter.key}-${this.type}-input`).typeahead({
+        highlight: true,
+        minLength: 1
+      },
+      {
+        name: this.filter.key,
+        limit: 10,
+        source: this.bloodhound
+      })
+        .bind('typeahead:select', (ev, selection) => {
+          this.setFilter(this.filter.key, selection)
+        })
+        .bind('typeahead:autocomplete', (ev, selection) => {
+          this.setFilter(this.filter.key, selection)
+        })
+    }
+  },
+  mounted () {
+    if (this.typeahead) {
+      this.initTypeahead()
+      this.subscription = this.$store.subscribeAction({
+        before: (action, state) => {},
+        after: (action, state) => {
+          // respond to options changing
+          if (action.type.includes(`SET_${this.filter.key.toUpperCase()}_OPTIONS`)) {
+            this.bloodhound.clear()
+            this.bloodhound.add(this.getOptionsForFilter(this.filter.key).map(f => f.key))
+          }
+        }
+      })
+    }
+  },
+  beforeDestroy () {
+    if (this.typeahead) {
+      this.subscription()
+      this.bloodhound.clear()
     }
   }
 }
