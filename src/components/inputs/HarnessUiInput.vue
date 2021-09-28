@@ -151,3 +151,37 @@ export default {
   }
 }
 </script>
+<style>
+  .tt-input {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    color: #999;
+}
+
+.tt-menu {
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 5px 0;
+    background-color: white;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0,0,0,.5);
+}
+
+.tt-suggestion {
+    padding: 5px 10px;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+.tt-suggestion p {
+    margin: 0;
+}
+
+</style>
