@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{getFilter(this.filter.key)}}
     <div v-if="labelPosition == 'horizontal'" :class="(isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
       <div class="row form-row">
         <div :class="'col-'+labelColumnSize + ' ' + (isFilterDirty(filter.key) ? 'dirty-filter-label-wrapper' : '')">
