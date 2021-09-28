@@ -11,16 +11,7 @@
         v-for="(option, idx) in getOptionsForFilter(filter.key)"
         :key="idx"
       >
-        <input
-          class="form-check-input databue-ui-radiogroup-input"
-          type="radio"
-          :name="filter.key"
-          :id="filter.key + option.key"
-          :value="option.key"
-          :disabled="option.disabled"
-          v-model="boundValue"
-          :aria-labelledby="filter.key + option.key + '-label'"
-        />
+        <RadioGroupPartial v-bind="{...$props, ...$attrs, option }" />
         <label
           class="form-check-label harness-ui-radiogroup-label"
           :id="filter.key + option.key + '-label'"
@@ -46,16 +37,7 @@
             v-for="(option, idx) in getOptionsForFilter(filter.key)"
             :key="idx"
           >
-            <input
-              class="form-check-input databue-ui-radiogroup-input"
-              type="radio"
-              :name="filter.key"
-              :id="filter.key + option.key"
-              :value="option.key"
-              :disabled="option.disabled"
-              v-model="boundValue"
-              :aria-labelledby="filter.key + option.key + '-label'"
-            />
+            <RadioGroupPartial v-bind="{...$props, ...$attrs, option }" />
             <label
               class="form-check-label harness-ui-radiogroup-label"
               :id="filter.key + option.key + '-label'"
@@ -73,8 +55,10 @@
 <script>
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
+import RadioGroupPartial from './partials/RadioGroupPartial'
 export default {
   name: 'harness-ui-radiogroup',
+  components: { RadioGroupPartial },
   mixins: [inputProps, inputFilter],
   props: {
     inline: {

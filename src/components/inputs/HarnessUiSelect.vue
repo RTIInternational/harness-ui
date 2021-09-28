@@ -11,21 +11,7 @@
           />
         </div>
         <div :class="'col-'+(12 - labelColumnSize)">
-          <select
-            :multiple="multiple"
-            :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
-            v-model="boundValue"
-            :id="filter.key+'-select'"
-            :aria-labelledby="filter.key + '-label'"
-          >
-            <option
-              v-for="option in getOptionsForFilter(filter.key)"
-              :key="option.key"
-              :value="option.key"
-              :disabled="option.disabled"
-              v-html="option.label"
-            />
-          </select>
+          <SelectPartial v-bind="{...$props, ...$attrs}" />
           <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
         </div>
       </div>
@@ -37,39 +23,11 @@
         :id="filter.key+'-label'"
         v-html="filter.label"
       />
-      <select
-        :multiple="multiple"
-        :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
-        v-model="boundValue"
-        :id="filter.key+'-select'"
-        :aria-labelledby="filter.key + '-label'"
-      >
-        <option
-          v-for="option in getOptionsForFilter(filter.key)"
-          :key="option.key"
-          :value="option.key"
-          :disabled="option.disabled"
-          v-html="option.label"
-        />
-      </select>
+      <SelectPartial v-bind="{...$props, ...$attrs}" />
       <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
     </div>
     <div v-if="labelPosition == 'none'" :class="'form-inline ' + (isFilterDirty(filter.key) ? 'dirty-filter-wrapper' : '')">
-      <select
-        :multiple="multiple"
-        :class="'form-control harness-ui-select ' + (isFilterDirty(filter.key) ? 'dirty-filter-select' : '')"
-        v-model="boundValue"
-        :id="filter.key+'-select'"
-        :aria-label="filter.label"
-      >
-        <option
-          v-for="option in getOptionsForFilter(filter.key)"
-          :key="option.key"
-          :value="option.key"
-          :disabled="option.disabled"
-          v-html="option.label"
-        />
-      </select>
+      <SelectPartial v-bind="{...$props, ...$attrs}" />
       <small v-if="helperText" v-html="helperText" :class="'form-text harness-ui-select-helper-text harness-ui-helper-text ' + helperTextClass"></small>
     </div>
   </div>
@@ -77,9 +35,11 @@
 <script>
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
+import SelectPartial from './partials/SelectPartial'
 export default {
   name: 'harness-ui-select',
   mixins: [inputProps, inputFilter],
+  components: { SelectPartial },
   props: {
     multiple: {
       type: Boolean,

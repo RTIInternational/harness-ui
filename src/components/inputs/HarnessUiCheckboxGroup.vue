@@ -48,15 +48,7 @@
           v-for="(option, idx) in getOptionsForFilter(filter.key)"
           :key="idx"
         >
-          <input
-            class="form-check-input harness-ui-checkboxgroup-input"
-            type="checkbox"
-            :name="filter.key + option.key"
-            :id="filter.key + option.key"
-            :value="option.key"
-            v-model="boundValue"
-            :aria-labelledby="filter.key + option.key + '-label'"
-          />
+          <CheckboxPartial v-bind="{...$props, ...$attrs, collapsed, option}" />
           <label
             class="form-check-label harness-ui-checkboxgroup-label"
             :id="filter.key + option.key + '-label'"
@@ -100,7 +92,7 @@
             class="col-form-label harness-ui-checkboxgroup-collapse-label"
             data-toggle="collapse"
             :href="'#harness-ui-checkbox-collapse-' + filter.key"
-            :role="button"
+            role="button"
             @click="collapsed = !collapsed"
           >
             <span v-if=" collapse && getFilter(filter.key).length === getOptionsForFilter(filter.key).length">
@@ -119,15 +111,7 @@
               v-for="(option, idx) in getOptionsForFilter(filter.key)"
               :key="idx"
             >
-              <input
-                class="form-check-input harness-ui-checkboxgroup-input"
-                type="checkbox"
-                :name="filter.key + option.key"
-                :id="filter.key + option.key"
-                :value="option.key"
-                v-model="boundValue"
-              :aria-labelledby="filter.key + option.key + '-label'"
-              />
+              <CheckboxPartial v-bind="{...$props, ...$attrs, collapsed, option}" />
               <label
                 class="form-check-label harness-ui-checkboxgroup-label"
                 :id="filter.key + option.key + '-label'"
@@ -146,15 +130,7 @@
         v-for="(option, idx) in getOptionsForFilter(filter.key)"
         :key="idx"
       >
-        <input
-          class="form-check-input harness-ui-checkboxgroup-input"
-          type="checkbox"
-          :name="filter.key + option.key"
-          :id="filter.key + option.key"
-          :value="option.key"
-          v-model="boundValue"
-          :aria-labelledby="filter.key + option.key + '-label'"
-        />
+        <CheckboxPartial v-bind="{...$props, ...$attrs, collapsed, option}" />
         <label
           class="form-check-label harness-ui-checkboxgroup-label"
           :id="filter.key + option.key + '-label'"
@@ -170,9 +146,11 @@
 <script>
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
+import CheckboxPartial from './partials/CheckboxPartial'
 export default {
   name: 'harness-ui-checkboxgroup',
   mixins: [inputProps, inputFilter],
+  components: { CheckboxPartial },
   data: () => { return { collapsed: true } },
   props: {
     inline: {
