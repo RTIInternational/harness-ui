@@ -106,8 +106,8 @@ export default {
     initTypeahead () {
       // create Bloodhound instance with flattened/tokenized list of option labels
       this.bloodhound = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.whitespace,
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        datumTokenizer: Bloodhound.tokenizers.ngram,
+        queryTokenizer: Bloodhound.tokenizers.ngram,
         local: this.getOptionsForFilter(this.filter.key).map(f => f.key)
       })
       // instantiate typeahead
