@@ -36,8 +36,7 @@
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
 import InputPartial from './partials/InputPartial'
-import $ from 'jquery'
-import Bloodhound from 'corejs-typeahead'
+import jquery from 'jquery'
 export default {
   name: 'harness-ui-input',
   mixins: [inputProps, inputFilter],
@@ -104,6 +103,9 @@ export default {
       return this.getOptionsForFilter(this.filter.key).map(f => f.key).includes(val)
     },
     initTypeahead () {
+      // lazy-loading corejs
+      window.$ = window.jQuery = jquery
+      const Bloodhound = require('corejs-typeahead')
       // create Bloodhound instance with flattened/tokenized list of option labels
       this.bloodhound = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.ngram,
@@ -115,7 +117,7 @@ export default {
         .reduce((acc, cn) => { acc[cn] = `harness-ui-typeahead-${cn}`; return acc }, {})
 
       // instantiate typeahead
-      $(`#${this.filter.key}-${this.type}-input`).typeahead({
+      window.$(`#${this.filter.key}-${this.type}-input`).typeahead({
         highlight: true,
         minLength: 1,
         classNames: classnames
