@@ -110,10 +110,15 @@ export default {
         queryTokenizer: Bloodhound.tokenizers.ngram,
         local: this.getOptionsForFilter(this.filter.key).map(f => f.key)
       })
+
+      const classnames = ['input', 'hint', 'menu', 'dataset', 'suggestion', 'empty', 'open', 'cursor', 'highlight']
+        .reduce((acc, cn) => { acc[cn] = `harness-ui-typeahead-${cn}`; return acc }, {})
+
       // instantiate typeahead
       $(`#${this.filter.key}-${this.type}-input`).typeahead({
         highlight: true,
-        minLength: 1
+        minLength: 1,
+        classNames: classnames
       },
       {
         name: this.filter.key,
@@ -152,15 +157,15 @@ export default {
 }
 </script>
 <style>
-  .tt-input {
+  .harness-ui-typeahead-input {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
-.tt-hint {
+.harness-ui-typeahead-hint {
     color: #999;
 }
 
-.tt-menu {
+.harness-ui-typeahead-menu {
     max-width: 100%;
     margin-top: 5px;
     padding: 5px 0;
@@ -171,16 +176,16 @@ export default {
     box-shadow: 0 5px 5px rgba(0,0,0,.5);
 }
 
-.tt-suggestion {
+.harness-ui-typeahead-suggestion {
     padding: 5px 10px;
 }
 
-.tt-suggestion.tt-cursor {
+.harness-ui-typeahead-suggestion.harness-ui-typeahead-cursor {
     color: #fff;
     background-color: #0097cf;
 
 }
-.tt-suggestion p {
+.harness-ui-typeahead-suggestion p {
     margin: 0;
 }
 
