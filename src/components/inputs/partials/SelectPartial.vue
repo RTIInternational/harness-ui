@@ -12,6 +12,7 @@
           :value="option.key"
           :disabled="option.disabled"
           :hidden="option.hidden"
+          :title="option.label"
           v-html="option.label"
       />
   </select>
