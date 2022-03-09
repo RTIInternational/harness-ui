@@ -6,6 +6,7 @@ import DataTable508 from './components/DataTable508'
 import ChartWithTable from './components/ChartWithTable'
 import InteractiveTable from './components/InteractiveTable'
 import FilterPicker from './components/FilterPicker'
+import FilterAccordion from './components/FilterAccordion'
 import HarnessUiInput from './components/inputs/HarnessUiInput'
 import HarnessUiSelect from './components/inputs/HarnessUiSelect'
 import HarnessUiRadioGroup from './components/inputs/HarnessUiRadioGroup'
@@ -20,6 +21,7 @@ const components = {
   ChartWithTable,
   InteractiveTable,
   FilterPicker,
+  FilterAccordion,
   HarnessUiInput,
   HarnessUiSelect,
   HarnessUiRadioGroup,
