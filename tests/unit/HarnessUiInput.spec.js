@@ -7,10 +7,10 @@ import Chart from './Chart'
 import { data } from './mockData.json'
 
 const PageComponent = {
-  render() {
+  render () {
     return (
       <div>
-        <HarnessUiInput filter={{key: 'search'}} labelPosition="vertical" />
+        <HarnessUiInput filter={{ key: 'search' }} labelPosition="vertical" />
         <Chart />
       </div>
     )
@@ -18,28 +18,29 @@ const PageComponent = {
 }
 
 class Page {
-    key = 'home'
-    pageComponent = PageComponent
-    retrieveData = async function (state, pageObject, hs) {
-      let persons = data
-      if (hs.getFilter('search')) {
-        persons = persons.filter(person => person.name === hs.getFilter('search'))
-      }
-      return { chart: persons }
+  key = 'home'
+  pageComponent = PageComponent
+  retrieveData = async function (state, pageObject, hs) {
+    let persons = data
+    if (hs.getFilter('search')) {
+      persons = persons.filter(person => person.name === hs.getFilter('search'))
     }
-    filters = () => ({ search: { key: 'search' }})
-    charts = () => ({ chart: { key: 'chart' } })
+    return { chart: persons }
+  }
+
+  filters = () => ({ search: { key: 'search' } })
+  charts = () => ({ chart: { key: 'chart' } })
 }
 
-describe("Input", () => {
-  test("input filters chart", async () => {
+describe('Input', () => {
+  test('input filters chart', async () => {
     const wrapper = Wrapper([Page], PageComponent)
     const searchInput = wrapper.find('input')
     const chart = wrapper.find('p')
-    
+
     await searchInput.setValue('Olivia')
     await flushPromises()
 
     expect(chart.text()).toContain('Olivia')
-  });
-});
+  })
+})

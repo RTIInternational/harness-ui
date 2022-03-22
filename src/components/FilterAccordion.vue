@@ -147,11 +147,11 @@ export default {
     // syncs the bootstrap collapse lifecycle with icons
     toggle (event) {
       event.preventDefault()
-      let filterType = event.target.id.split('-')[0]
+      const filterType = event.target.id.split('-')[0]
       $('#collapse-' + filterType).collapse('toggle')
 
       // get icon
-      let icon = document.getElementById(filterType + '-icon')
+      const icon = document.getElementById(filterType + '-icon')
       // if icon is down, then we are opening this panel
       if (icon.classList.contains('bi-caret-down-square')) {
         // change from "down" to "up"
@@ -161,7 +161,7 @@ export default {
         this.filterTypes
           .filter(fType => fType !== filterType)
           .forEach(fType => {
-            let icon = document.getElementById(fType + '-icon')
+            const icon = document.getElementById(fType + '-icon')
             if (icon.classList.contains('bi-caret-up-square')) {
               icon.classList.remove('bi-caret-up-square')
               icon.classList.add('bi-caret-down-square')
@@ -169,20 +169,20 @@ export default {
           })
       // we are closing the only open panel
       } else if (icon.classList.contains('bi-caret-up-square')) {
-        let icon = document.getElementById(filterType + '-icon')
+        const icon = document.getElementById(filterType + '-icon')
         icon.classList.remove('bi-caret-up-square')
         icon.classList.add('bi-caret-down-square')
       }
     },
     dirtyFilterString (filterType) {
-      let hs = this.hs
+      const hs = this.hs
       return this.subsetFiltersByType(filterType)
         .filter((f) => hs.isFilterDirty(f))
         .map((f) => hs.getLabel(f))
         .join(', ')
     },
     clearFilterTypeFilters (filterType) {
-      let filters = this.subsetFiltersByType(filterType)
+      const filters = this.subsetFiltersByType(filterType)
       this.initializeDefaults(filters)
       this.loadData()
     }

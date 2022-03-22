@@ -1,35 +1,35 @@
 export default {
   props: {
-    'chart': {
+    chart: {
       type: Object,
       required: true
     },
-    'tableClass': {
+    tableClass: {
       type: String,
       required: false,
       default: null
     },
-    'headerClass': {
+    headerClass: {
       type: String,
       required: false,
       default: null
     },
-    'labelClass': {
+    labelClass: {
       type: String,
       required: false,
       default: null
     },
-    'rowClass': {
+    rowClass: {
       type: String,
       required: false,
       default: null
     },
-    'cellClass': {
+    cellClass: {
       type: String,
       required: false,
       default: null
     },
-    'rowHeaderCol': {
+    rowHeaderCol: {
       type: Boolean,
       required: false,
       default: false

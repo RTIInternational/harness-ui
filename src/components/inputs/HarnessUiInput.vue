@@ -47,7 +47,7 @@ export default {
       type: String,
       default: 'text',
       validator: function (value) {
-        let validOptions = [
+        const validOptions = [
           'date',
           'datetime-local',
           'email',

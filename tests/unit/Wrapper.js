@@ -1,20 +1,19 @@
-import Vuex from 'vuex'
+
+import { mount } from '@vue/test-utils'
+import { createStore } from 'vuex'
 import harness from '@rtidatascience/harness'
 import { harnessUI } from '../../src/harness-ui'
-import { mount, createLocalVue } from '@vue/test-utils'
 
 const Wrapper = (pages, AppComponent, routeName) => {
-
-  const localVue = createLocalVue()
-  localVue.use(Vuex)
-
-  const store = new Vuex.Store()
-  localVue.use(harness, { store, pages })
-  localVue.use(harnessUI)
-
+  const store = createStore({})
   const wrapper = mount(AppComponent, {
-    localVue,
-    store,
+    global: {
+      plugins: [
+        store,
+        [harness, {store, pages}],
+        harnessUI
+      ]
+    }
   })
 
   return wrapper

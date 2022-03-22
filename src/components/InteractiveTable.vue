@@ -72,7 +72,7 @@
                 />
                 <td
                   v-else
-                  :key="idx2"
+                  :key="idx2 + '-td'"
                   :class="cellClass"
                   v-html="row[column]"
                 />
@@ -137,20 +137,20 @@ export default {
   name: 'InteractiveTable',
   mixins: [tables],
   props: {
-    'local': {
+    local: {
       type: Object,
       required: false,
       default: () => {}
     },
-    'numRowOptions': {
+    numRowOptions: {
       type: Array,
       required: true
     },
-    'defaultSortColumn': {
+    defaultSortColumn: {
       type: String,
       required: true
     },
-    'defaultSortOrder': {
+    defaultSortOrder: {
       type: String,
       required: false,
       default: 'asc',
@@ -158,7 +158,7 @@ export default {
         return ['asc', 'desc'].includes(value)
       }
     },
-    'numPaginationOptions': {
+    numPaginationOptions: {
       type: Number,
       required: false,
       default: 5
@@ -183,12 +183,12 @@ export default {
       this.columnSort = this.sortedDescending ? 'desc' : 'asc'
       if (this.tableOptions) {
         this.setFilter(this.chart.key + 'TableOptions', [{
-          'pageNumber': this.pageNumber,
-          'searchQuery': this.searchQuery,
-          'columnSelector': this.columnSelector,
-          'columnSort': this.sortedDescending ? 'desc' : 'asc',
-          'paginationAmount': this.paginationAmount,
-          'numberOfPages': this.numberOfPages
+          pageNumber: this.pageNumber,
+          searchQuery: this.searchQuery,
+          columnSelector: this.columnSelector,
+          columnSort: this.sortedDescending ? 'desc' : 'asc',
+          paginationAmount: this.paginationAmount,
+          numberOfPages: this.numberOfPages
         }])
       }
       if (!this.isSearchable || !this.isSortable || !this.isPaginated) {
@@ -199,12 +199,12 @@ export default {
       this.pageNumber = index
       if (this.tableOptions) {
         this.setFilter(this.chart.key + 'TableOptions', {
-          'pageNumber': this.pageNumber,
-          'searchQuery': this.searchQuery,
-          'columnSelector': this.columnSelector,
-          'columnSort': this.columnSort,
-          'paginationAmount': this.paginationAmount,
-          'numberOfPages': this.numberOfPages
+          pageNumber: this.pageNumber,
+          searchQuery: this.searchQuery,
+          columnSelector: this.columnSelector,
+          columnSort: this.columnSort,
+          paginationAmount: this.paginationAmount,
+          numberOfPages: this.numberOfPages
         })
       }
       if (!this.isSearchable || !this.isSortable || !this.isPaginated) {
@@ -224,7 +224,7 @@ export default {
     },
     tableAdaptedData () {
       let filteredData = this.getChartData(this.chart.key) || null
-      let tableAdapter = this.getChartProps(this.chart.key).tableAdapter || null
+      const tableAdapter = this.getChartProps(this.chart.key).tableAdapter || null
       if (filteredData && tableAdapter) {
         try {
           filteredData = tableAdapter(this.chart, this.filters, filteredData, this.hs)
@@ -265,11 +265,11 @@ export default {
         }
         // pagination
         if (this.isPaginated) {
-          let currentPageNum = this.pageNumber
-          let tableRows = filteredData.length
-          let rowsPerPage = parseInt(this.paginationAmount)
-          let lastVisibleRow = (currentPageNum * rowsPerPage) > tableRows ? tableRows : (currentPageNum * rowsPerPage)
-          let firstVisibleRow = (currentPageNum - 1) * rowsPerPage
+          const currentPageNum = this.pageNumber
+          const tableRows = filteredData.length
+          const rowsPerPage = parseInt(this.paginationAmount)
+          const lastVisibleRow = (currentPageNum * rowsPerPage) > tableRows ? tableRows : (currentPageNum * rowsPerPage)
+          const firstVisibleRow = (currentPageNum - 1) * rowsPerPage
           filteredData = filteredData.slice(firstVisibleRow, lastVisibleRow)
         }
         return filteredData
@@ -278,19 +278,19 @@ export default {
     },
     isSearchable () {
       if (this.local) {
-        return !this.local.hasOwnProperty('search') || (this.local.hasOwnProperty('search') && this.local.search !== false)
+        return !Object.prototype.hasOwnProperty.call(this.local, 'search') || (Object.prototype.hasOwnProperty.call(this.local, 'search') && this.local.search !== false)
       }
       return true
     },
     isSortable () {
       if (this.local) {
-        return !this.local.hasOwnProperty('sort') || (this.local.hasOwnProperty('sort') && this.local.sort !== false)
+        return !Object.prototype.hasOwnProperty.call(this.local, 'sort') || (Object.prototype.hasOwnProperty.call(this.local, 'sort') && this.local.sort !== false)
       }
       return true
     },
     isPaginated () {
       if (this.local) {
-        return !this.local.hasOwnProperty('paginate') || (this.local.hasOwnProperty('paginate') && this.local.paginate !== false)
+        return !Object.prototype.hasOwnProperty.call(this.local, 'paginate') || (Object.prototype.hasOwnProperty.call(this.local, 'paginate') && this.local.paginate !== false)
       }
       return true
     },
@@ -310,10 +310,10 @@ export default {
           }, false)
         })
       }
-      let pageRange = [1]
-      let rowsPerPage = parseInt(this.paginationAmount)
-      let totalRows = this.validateChartData(filteredData, this.chart.key) ? this.validateChartData(filteredData, this.chart.key).length : 0
-      let numPages = Math.ceil(totalRows / rowsPerPage)
+      const pageRange = [1]
+      const rowsPerPage = parseInt(this.paginationAmount)
+      const totalRows = this.validateChartData(filteredData, this.chart.key) ? this.validateChartData(filteredData, this.chart.key).length : 0
+      const numPages = Math.ceil(totalRows / rowsPerPage)
       for (let i = 2; i <= numPages; i++) {
         pageRange.push(i)
       }
@@ -328,12 +328,12 @@ export default {
         this.pageNumber = 1
         if (this.tableOptions) {
           this.setFilter(this.chart.key + 'TableOptions', {
-            'pageNumber': this.pageNumber,
-            'searchQuery': this.searchQuery,
-            'columnSelector': this.columnSelector,
-            'columnSort': this.columnSort,
-            'paginationAmount': this.paginationAmount,
-            'numberOfPages': this.numberOfPages
+            pageNumber: this.pageNumber,
+            searchQuery: this.searchQuery,
+            columnSelector: this.columnSelector,
+            columnSort: this.columnSort,
+            paginationAmount: this.paginationAmount,
+            numberOfPages: this.numberOfPages
           })
         }
         if (!this.isSearchable || !this.isSortable || !this.isPaginated) {
@@ -354,12 +354,12 @@ export default {
       this.pageNumber = 1
       if (this.tableOptions) {
         this.setFilter(this.chart.key + 'TableOptions', {
-          'pageNumber': this.pageNumber,
-          'searchQuery': this.searchQuery,
-          'columnSelector': this.columnSelector,
-          'columnSort': this.columnSort,
-          'paginationAmount': this.paginationAmount,
-          'numberOfPages': this.numberOfPages
+          pageNumber: this.pageNumber,
+          searchQuery: this.searchQuery,
+          columnSelector: this.columnSelector,
+          columnSort: this.columnSort,
+          paginationAmount: this.paginationAmount,
+          numberOfPages: this.numberOfPages
         })
       }
       this.LOAD_DATA()

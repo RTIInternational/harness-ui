@@ -24,7 +24,7 @@
                       />
                       <td
                         v-else
-                        :key="idx2"
+                        :key="idx2 + '-td'"
                         :class="cellClass"
                         v-html="row[column]"
                       />
@@ -45,8 +45,8 @@ export default {
       return this.validatedChartData ? Object.keys(this.validatedChartData[0]) : []
     },
     chartData () {
-      let chartData = this.getChartData(this.chart.key) || null
-      let tableAdapter = this.getChartProps(this.chart.key).tableAdapter || null
+      const chartData = this.getChartData(this.chart.key) || null
+      const tableAdapter = this.getChartProps(this.chart.key).tableAdapter || null
       if (chartData) {
         if (tableAdapter) {
           try {

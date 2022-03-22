@@ -23,15 +23,15 @@
 export default {
   name: 'navbar',
   props: {
-    'title': {
-      'type': String,
-      'required': false,
-      'default': 'dataVue'
+    title: {
+      type: String,
+      required: false,
+      default: 'dataVue'
     },
-    'classes': {
-      'type': String,
-      'required': false,
-      'default': 'navbar-light bg-light'
+    classes: {
+      type: String,
+      required: false,
+      default: 'navbar-light bg-light'
     }
   }
 }

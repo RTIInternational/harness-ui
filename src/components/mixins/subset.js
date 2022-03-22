@@ -26,7 +26,7 @@ export default {
             return obj
           }, {})
         if (this.orderByOnly && !this.except) {
-          let newChartsObj = {}
+          const newChartsObj = {}
           this.only.forEach(chartKey => {
             newChartsObj[chartKey] = charts[chartKey]
           })

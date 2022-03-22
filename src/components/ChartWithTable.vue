@@ -217,7 +217,7 @@ export default {
   },
   computed: {
     labels () {
-      let ret = {}
+      const ret = {}
       if (this.$attrs.tableColumns && this.$attrs.tableColumnLabels) {
         ret.tableColumns = this.$attrs.tableColumns
         ret.tableColumnLabels = this.$attrs.tableColumnLabels
