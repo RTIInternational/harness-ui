@@ -22,7 +22,7 @@
             <div class="col-5">
                 <label class="col-form-label harness-ui-select-label harness-ui-multiselect-listbox-select-label harness-ui-select-label-vertical">Selected</label>
                 <select class="form-control harness-ui-select harness-ui-multiselect-listbox-select harness-ui-multiselect-listbox-select-right" multiple="true" v-model="rightBox">
-                    <option v-for="option in rightBoxOptions" :key="option.key" :value="option.key">{{option.label}}</option>
+                    <option v-for="option in rightBoxOptions" :key="option.key" :value="option.key" :title="option.label">{{option.label}}</option>
                 </select>
             </div>
         </div>
