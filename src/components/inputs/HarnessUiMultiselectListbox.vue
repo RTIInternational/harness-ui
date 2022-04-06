@@ -10,7 +10,7 @@
             <div class="col-5">
                 <label class="col-form-label harness-ui-select-label harness-ui-multiselect-listbox-select-label harness-ui-select-label-vertical">Options</label>
                 <select class="form-control harness-ui-select harness-ui-multiselect-listbox-select harness-ui-multiselect-listbox-select-left" multiple="true" v-model="leftBox">
-                    <option v-for="option in leftBoxOptions" :key="option.key" :value="option.key">{{option.label}}</option>
+                    <option v-for="option in leftBoxOptions" :key="option.key" :value="option.key" :title="option.label">{{option.label}}</option>
                 </select>
             </div>
             <div class="col-2">
