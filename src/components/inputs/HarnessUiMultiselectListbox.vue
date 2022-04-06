@@ -3,7 +3,7 @@
         <label>{{this.filter.label}}</label>
         <div class="row" v-if="searchable">
             <div class="col">
-                <input type="text" :id="`harness-ui-multiselect-listbox-search-${filter.key}`" class="form-control harness-ui-input harness-ui-multiselect-listbox-search-input" v-model="search"/>
+                <input type="text" :id="`harness-ui-multiselect-listbox-search-${filter.key}`" class="form-control harness-ui-input harness-ui-multiselect-listbox-search-input" :disabled="searchDisabled" v-model="search"/>
             </div>
         </div>
         <div class="row align-items-center">
@@ -52,7 +52,8 @@ export default {
       bloodhound: null,
       leftBox: [],
       rightBox: [],
-      search: ''
+      search: '',
+      searchDisabled: false
     }
   },
   computed: {
@@ -69,14 +70,24 @@ export default {
     leftToRight () {
       const newVal = this.getFilter(this.filter.key).concat(this.leftBox)
       this.setFilterLoadData(this.filter.key, newVal)
-      this.bloodhound.clear()
-      this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
+      this.lifecycleBloodhound()
     },
     rightToLeft () {
       const newVal = this.getFilter(this.filter.key).filter(f => !this.rightBox.includes(f))
       this.setFilterLoadData(this.filter.key, newVal)
-      this.bloodhound.clear()
-      this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
+      this.lifecycleBloodhound()
+    },
+    lifecycleBloodhound () {
+      if (this.bloodhound) {
+        this.bloodhound.clear()
+        if (this.leftBoxOptions.length) {
+          this.searchDisabled = false
+          this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
+        } else {
+          this.searchDisabled = true
+          this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
+        }
+      }
     },
     initTypeahead () {
       // lazy-loading corejs
