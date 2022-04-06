@@ -85,7 +85,6 @@ export default {
           this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
         } else {
           this.searchDisabled = true
-          this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
         }
       }
     },
