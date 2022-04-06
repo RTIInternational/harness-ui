@@ -11,6 +11,7 @@ import HarnessUiInput from './components/inputs/HarnessUiInput'
 import HarnessUiSelect from './components/inputs/HarnessUiSelect'
 import HarnessUiRadioGroup from './components/inputs/HarnessUiRadioGroup'
 import HarnessUiCheckboxGroup from './components/inputs/HarnessUiCheckboxGroup.vue'
+import HarnessUiMultiselectListbox from './components/inputs/HarnessUiMultiselectListbox'
 import navbar from './components/navbar'
 const components = {
   navbar,
@@ -25,7 +26,8 @@ const components = {
   HarnessUiInput,
   HarnessUiSelect,
   HarnessUiRadioGroup,
-  HarnessUiCheckboxGroup
+  HarnessUiCheckboxGroup,
+  HarnessUiMultiselectListbox
 }
 
 export default components
