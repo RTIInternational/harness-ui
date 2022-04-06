@@ -68,13 +68,13 @@ export default {
   methods: {
     leftToRight () {
       const newVal = this.getFilter(this.filter.key).concat(this.leftBox)
-      this.setFilter(this.filter.key, newVal)
+      this.setFilterLoadData(this.filter.key, newVal)
       this.bloodhound.clear()
       this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
     },
     rightToLeft () {
       const newVal = this.getFilter(this.filter.key).filter(f => !this.rightBox.includes(f))
-      this.setFilter(this.filter.key, newVal)
+      this.setFilterLoadData(this.filter.key, newVal)
       this.bloodhound.clear()
       this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
     },
