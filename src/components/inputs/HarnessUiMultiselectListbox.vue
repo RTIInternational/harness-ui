@@ -58,12 +58,13 @@ export default {
   },
   computed: {
     leftBoxOptions () {
-      const selected = this.getFilter(this.filter.key)
-      return this.getOptionsForFilter(this.filter.key).filter(f => !selected.includes(f.key) && (this.search === '' || f.label.toLowerCase().includes(this.search.toLowerCase())))
+      return this.unselectedOptions.filter(f => this.search === '' || f.label.toLowerCase().includes(this.search.toLowerCase()))
     },
     rightBoxOptions () {
-      const selected = this.getFilter(this.filter.key)
-      return this.getOptionsForFilter(this.filter.key).filter(f => selected.includes(f.key))
+      return this.getOptionsForFilter(this.filter.key).filter(f => this.getFilter(this.filter.key).includes(f.key))
+    },
+    unselectedOptions () {
+      return this.getOptionsForFilter(this.filter.key).filter(f => !this.getFilter(this.filter.key).includes(f.key))
     }
   },
   methods: {
@@ -80,9 +81,9 @@ export default {
     lifecycleBloodhound () {
       if (this.bloodhound) {
         this.bloodhound.clear()
-        if (this.leftBoxOptions.length) {
+        if (this.unselectedOptions.length) {
           this.searchDisabled = false
-          this.bloodhound.add(this.leftBoxOptions.map(f => f.label))
+          this.bloodhound.add(this.unselectedOptions.map(f => f.label))
         } else {
           this.searchDisabled = true
         }
