@@ -9,11 +9,13 @@
         v-for="(filterType, key) in filterTypes"
         :id="filterType + '-card'"
         :key="key"
+        @click="toggle"
+        data-toggle="collapse"
+        :data-target="'#collapse-' + filterType"
       >
         <div
           class="card-header"
           :id="filterType + '-heading'"
-          @click="toggle"
         >
           <h2 class="mb-0">
             <div class="row">
@@ -133,7 +135,6 @@ export default {
     toggle (event) {
       event.preventDefault()
       let filterType = event.target.id.split('-')[0]
-      window.$('#collapse-' + filterType).collapse('toggle')
 
       // get icon
       let icon = document.getElementById(filterType + '-icon')
