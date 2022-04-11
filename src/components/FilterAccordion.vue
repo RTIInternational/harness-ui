@@ -26,8 +26,6 @@
                   class="btn btn-link"
                   :id="filterType + '-button'"
                   type="button"
-                  data-toggle="collapse"
-                  :data-target="'#collapse-' + filterType"
                   aria-expanded="false"
                   :aria-controls="'collapse-' + filterType"
                 >
