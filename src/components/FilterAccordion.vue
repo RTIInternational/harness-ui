@@ -9,13 +9,13 @@
         v-for="(filterType, key) in filterTypes"
         :id="filterType + '-card'"
         :key="key"
-        @click="toggle"
-        data-toggle="collapse"
-        :data-target="'#collapse-' + filterType"
       >
         <div
           class="card-header"
           :id="filterType + '-heading'"
+          @click="toggle"
+          data-toggle="collapse"
+          :data-target="'#collapse-' + filterType"
         >
           <h2 class="mb-0">
             <div class="row">
