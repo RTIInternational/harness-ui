@@ -150,7 +150,7 @@ export default {
     toggle (event) {
       event.preventDefault()
       let filterType = event.target.id.split('-')[0]
-      $('#collapse-' + filterType).collapse('toggle')
+      window.$('#collapse-' + filterType).collapse('toggle')
 
       // get icon
       let icon = document.getElementById(filterType + '-icon')
