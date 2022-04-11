@@ -64,9 +64,9 @@
         >
           <div class="card-body">
             <FilterGrid
-              :columns="layout.columns"
-              :label-position="layout.labelPosition"
-              :spread="layout.spread"
+              :columns="filterGridLayout(filterType).columns"
+              :label-position="filterGridLayout(filterType).labelPosition"
+              :spread="filterGridLayout(filterType).spread"
               :only="subsetFiltersByType(filterType)"
               :clear-button="false"
             />
@@ -113,20 +113,6 @@ export default {
         }
         return acc
       }, [])
-    },
-    layout () {
-      let newLayout = {}
-      if (!this.filterLayout) {
-        newLayout = this.filterTypes.reduce((acc, filterType) => {
-          acc[filterType] = {
-            columns: 4,
-            labelPosition: 'vertical',
-            spread: true
-          }
-          return acc
-        }, {})
-      }
-      return newLayout || this.filterLayout
     }
   },
   methods: {
@@ -186,6 +172,16 @@ export default {
       let filters = this.subsetFiltersByType(filterType)
       this.initializeDefaults(filters)
       this.loadData()
+    },
+    filterGridLayout (filterType) {
+      if (!this.filterLayout) {
+        return {
+          columns: 4,
+          labelPosition: 'vertical',
+          spread: true
+        }
+      }
+      return this.filterLayout[filterType]
     }
   }
 }
