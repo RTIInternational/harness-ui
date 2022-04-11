@@ -33,7 +33,7 @@
                 >
                   {{ filterMapping(filterType) }}
                 </button>
-                <small v-if="dirtyFilterString(filterType).length">
+                <small v-if="dirtyFilterString(filterType).length" :id="filterType + '-small'">
                   {{ dirtyFilterString(filterType) }}
                 </small>
               </div>
