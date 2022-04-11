@@ -109,7 +109,7 @@ export default {
     filterTypes () {
       return Object.keys(this.filters).reduce((acc, filter) => {
         filter = this.filters[filter]
-        if (!acc.includes(filter.props.filterType) && filter.props.filterType !== 'internal' && filter.props.filterType) {
+        if (filter.props && !acc.includes(filter.props.filterType) && filter.props.filterType !== 'internal' && filter.props.filterType) {
           acc.push(filter.props.filterType)
         }
         return acc
@@ -134,7 +134,9 @@ export default {
     subsetFiltersByType (type) {
       return Object.keys(this.filters).filter(
         function (filter) {
-          return this.filters[filter].props.filterType === type && this.validFilters.includes(filter)
+          if (this.filters[filter].props) {
+            return this.filters[filter].props.filterType === type && this.validFilters.includes(filter)
+          }
         }.bind(this)
       )
     },
