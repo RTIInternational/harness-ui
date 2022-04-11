@@ -21,7 +21,7 @@
                 class="col-6"
                 :id="filterType + '-col1'"
               >
-                <i :class="'bi bi-ui-checks ' + (dirtyFilterString(filterType).length ? 'active' : '')" />
+                <i :class="'bi bi-ui-checks ' + (dirtyFilterString(filterType).length ? 'active' : '')" :id="filterType + '-checks'" />
                 <button
                   class="btn btn-link"
                   :id="filterType + '-button'"
