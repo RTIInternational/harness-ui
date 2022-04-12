@@ -14,6 +14,8 @@
           class="card-header"
           :id="filterType + '-heading'"
           @click="toggle"
+          data-toggle="collapse"
+          :data-target="'#collapse-' + filterType"
         >
           <h2 class="mb-0">
             <div class="row">
@@ -21,19 +23,17 @@
                 class="col-6"
                 :id="filterType + '-col1'"
               >
-                <i :class="'bi bi-ui-checks ' + (dirtyFilterString(filterType).length ? 'active' : '')" />
+                <i :class="'bi bi-ui-checks ' + (dirtyFilterString(filterType).length ? 'active' : '')" :id="filterType + '-checks'" />
                 <button
                   class="btn btn-link"
                   :id="filterType + '-button'"
                   type="button"
-                  data-toggle="collapse"
-                  :data-target="'#collapse-' + filterType"
                   aria-expanded="false"
                   :aria-controls="'collapse-' + filterType"
                 >
                   {{ filterMapping(filterType) }}
                 </button>
-                <small v-if="dirtyFilterString(filterType).length">
+                <small v-if="dirtyFilterString(filterType).length" :id="filterType + '-small'">
                   {{ dirtyFilterString(filterType) }}
                 </small>
               </div>
@@ -64,9 +64,9 @@
         >
           <div class="card-body">
             <FilterGrid
-              :columns="layout.columns"
-              :label-position="layout.labelPosition"
-              :spread="layout.spread"
+              :columns="filterGridLayout(filterType).columns"
+              :label-position="filterGridLayout(filterType).labelPosition"
+              :spread="filterGridLayout(filterType).spread"
               :only="subsetFiltersByType(filterType)"
               :clear-button="false"
             />
@@ -88,7 +88,6 @@
   </div>
 </template>
 <script>
-import $ from 'jquery'
 export default {
   name: 'FiltersAccordion',
   props: {
@@ -114,20 +113,6 @@ export default {
         }
         return acc
       }, [])
-    },
-    layout () {
-      let newLayout = {}
-      if (!this.filterLayout) {
-        newLayout = this.filterTypes.reduce((acc, filterType) => {
-          acc[filterType] = {
-            columns: 4,
-            labelPosition: 'vertical',
-            spread: true
-          }
-          return acc
-        }, {})
-      }
-      return newLayout || this.filterLayout
     }
   },
   methods: {
@@ -150,7 +135,6 @@ export default {
     toggle (event) {
       event.preventDefault()
       let filterType = event.target.id.split('-')[0]
-      window.$('#collapse-' + filterType).collapse('toggle')
 
       // get icon
       let icon = document.getElementById(filterType + '-icon')
@@ -187,6 +171,16 @@ export default {
       let filters = this.subsetFiltersByType(filterType)
       this.initializeDefaults(filters)
       this.loadData()
+    },
+    filterGridLayout (filterType) {
+      if (!this.filterLayout) {
+        return {
+          columns: 4,
+          labelPosition: 'vertical',
+          spread: true
+        }
+      }
+      return this.filterLayout[filterType]
     }
   }
 }
