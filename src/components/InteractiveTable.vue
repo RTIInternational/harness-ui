@@ -181,7 +181,7 @@ export default {
       }
       this.columnSelector = columnName
       this.columnSort = this.sortedDescending ? 'desc' : 'asc'
-      if (this.tableOptions) {
+      if (this.tableOptions.length) {
         this.setFilter(this.chart.key + 'TableOptions', [{
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
@@ -197,7 +197,7 @@ export default {
     },
     setPageNum (index) {
       this.pageNumber = index
-      if (this.tableOptions) {
+      if (this.tableOptions.length) {
         this.setFilter(this.chart.key + 'TableOptions', {
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
@@ -220,7 +220,11 @@ export default {
   },
   computed: {
     tableOptions () {
-      return this.getOptionsForFilter(this.chart.key + 'TableOptions') || []
+      let filters = []
+      if (Object.keys(this.filters).includes(this.chart.key + 'TableOptions')) {
+        filters = this.getOptionsForFilter(this.chart.key + 'TableOptions')
+      }
+      return filters
     },
     tableAdaptedData () {
       let filteredData = this.getChartData(this.chart.key) || null
@@ -326,7 +330,7 @@ export default {
       set (value) {
         this.searchQuery = value
         this.pageNumber = 1
-        if (this.tableOptions) {
+        if (this.tableOptions.length) {
           this.setFilter(this.chart.key + 'TableOptions', {
             'pageNumber': this.pageNumber,
             'searchQuery': this.searchQuery,
@@ -352,7 +356,7 @@ export default {
   beforeUpdate () {
     if (this.pageNumber > this.numberOfPages.length) {
       this.pageNumber = 1
-      if (this.tableOptions) {
+      if (this.tableOptions.length) {
         this.setFilter(this.chart.key + 'TableOptions', {
           'pageNumber': this.pageNumber,
           'searchQuery': this.searchQuery,
