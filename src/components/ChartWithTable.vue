@@ -33,14 +33,18 @@
                 :aria-label="'Show Table: ' + (chart.title || chart.key)"
                 @click="toggleView"
                 class="btn btn-sm btn-primary harness-ui-togglebutton"
-              >Show Table</button>
+              >
+                <span v-html="showTableButtonText" />
+              </button>
               <button
                 v-if="tableDisplay == 'toggle' && view == 'table'"
                 role="button"
                 :aria-label="'Show Chart: ' + (chart.title || chart.key)"
                 @click="toggleView"
                 class="btn btn-sm btn-primary harness-ui-togglebutton"
-              >Show Chart</button>
+              >
+                <span v-html="showChartButtonText" />
+              </button>
               <button
                 v-if="downloadable && getChartData(chart.key)"
                 role="button"
@@ -96,14 +100,18 @@
           :aria-label="'Show Table: ' + (chart.title || chart.key)"
           @click="toggleView"
           class="btn btn-sm btn-primary harness-ui-togglebutton"
-        >Show Table</button>
+        >
+          <span v-html="showTableButtonText" />
+        </button>
         <button
           v-if="tableDisplay == 'toggle' && view == 'table'"
           role="button"
           :aria-label="'Show Chart: ' + (chart.title || chart.key)"
           @click="toggleView"
           class="btn btn-sm btn-primary harness-ui-togglebutton"
-        >Show Chart</button>
+        >
+          <span v-html="showChartButtonText" />
+        </button>
         <span v-if="downloadable && getChartData(chart.key)">
           <button
             role="button"
@@ -188,6 +196,16 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    showTableButtonText: {
+      type: String,
+      required: false,
+      default: 'Show Table'
+    },
+    showChartButtonText: {
+      type: String,
+      required: false,
+      default: 'Show Chart'
     }
   },
   data: function () {
