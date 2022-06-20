@@ -7,10 +7,10 @@ import Chart from './Chart'
 import { data } from './mockData.json'
 
 const PageComponent = {
-  render() {
+  render () {
     return (
       <div>
-        <HarnessUiInput filter={{key: 'search'}} labelPosition="vertical" />
+        <HarnessUiInput filter={{ key: 'search' }} labelPosition="vertical" />
         <Chart />
       </div>
     )
@@ -27,19 +27,19 @@ class Page {
       }
       return { chart: persons }
     }
-    filters = () => ({ search: { key: 'search' }})
+    filters = () => ({ search: { key: 'search' } })
     charts = () => ({ chart: { key: 'chart' } })
 }
 
-describe("Input", () => {
-  test("input filters chart", async () => {
+describe('Input', () => {
+  test('input filters chart', async () => {
     const wrapper = Wrapper([Page], PageComponent)
     const searchInput = wrapper.find('input')
     const chart = wrapper.find('p')
-    
+
     await searchInput.setValue('Olivia')
     await flushPromises()
 
     expect(chart.text()).toContain('Olivia')
-  });
-});
+  })
+})

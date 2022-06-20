@@ -4,7 +4,6 @@ import { harnessUI } from '../../src/harness-ui'
 import { mount, createLocalVue } from '@vue/test-utils'
 
 const Wrapper = (pages, AppComponent, routeName) => {
-
   const localVue = createLocalVue()
   localVue.use(Vuex)
 
@@ -14,7 +13,7 @@ const Wrapper = (pages, AppComponent, routeName) => {
 
   const wrapper = mount(AppComponent, {
     localVue,
-    store,
+    store
   })
 
   return wrapper
