@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label>{{this.filter.label}}</label>
+        <label class="harness-ui-select-label harness-ui-multiselect-listbox-top-label">{{this.filter.label}}</label>
         <div class="row" v-if="searchable">
             <div class="col">
                 <input type="text" :id="`harness-ui-multiselect-listbox-search-${filter.key}`" class="form-control harness-ui-input harness-ui-multiselect-listbox-search-input" :disabled="searchDisabled" v-model="search"/>
