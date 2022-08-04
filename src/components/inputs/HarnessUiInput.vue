@@ -124,8 +124,10 @@ export default {
       return this.getOptionsForFilter(this.filter.key).map(f => f.key).includes(val)
     },
     initTypeahead () {
+      if (window) {
+        window.$ = window.jQuery = jquery
+      }
       // lazy-loading corejs
-      window.$ = window.jQuery = jquery
       const Bloodhound = require('corejs-typeahead')
       // create Bloodhound instance with flattened/tokenized list of option labels
       this.bloodhound = new Bloodhound({

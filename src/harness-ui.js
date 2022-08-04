@@ -1,6 +1,8 @@
 import components from './manifest'
 import jquery from 'jquery'
-window.$ = window.jQuery = jquery
+if (window) {
+  window.$ = window.jQuery = jquery
+}
 
 export const harnessUI = {
   // eslint-disable-next-line
