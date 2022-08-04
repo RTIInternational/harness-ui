@@ -39,7 +39,7 @@
       <button
       v-if="inputClearButton"
       class="btn btn-outline-secondary harness-ui-input-group-clear-button"
-      @click="INITIALIZE_DEFAULTS([filter.key])"
+      @click="initDefault()"
       >
         <i class="bi bi-x"></i>
       </button>
@@ -86,6 +86,14 @@ export default {
       required: false,
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    initDefault () {
+      this.INITIALIZE_DEFAULTS([this.filter.key])
+      if (!this.synchronous) {
+        this.loadData()
+      }
     }
   }
 }
