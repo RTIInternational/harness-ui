@@ -73,6 +73,27 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    placeholder: {
+      required: false,
+      type: String,
+      default: ''
+    },
+    prependComponent: {
+      required: false,
+      type: Object
+    },
+    prependHTML: {
+      required: false,
+      type: String
+    },
+    appendComponent: {
+      required: false,
+      type: Object
+    },
+    appendHTML: {
+      required: false,
+      type: String
     }
   },
   data () {
