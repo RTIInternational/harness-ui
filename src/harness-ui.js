@@ -1,6 +1,6 @@
 import components from './manifest'
 import jquery from 'jquery'
-if (window) {
+if (typeof window !== 'undefined') {
   window.$ = window.jQuery = jquery
 }
 
