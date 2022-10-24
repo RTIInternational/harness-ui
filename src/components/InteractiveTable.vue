@@ -247,6 +247,9 @@ export default {
             return Object.values(row).reduce((acc, cell) => {
               if (!acc) {
                 if (cell) {
+                  if (typeof cell === 'number') {
+                    cell = cell.toString()
+                  }
                   return cell.toLowerCase().includes(this.searchQuery.toLowerCase())
                 }
                 return false
@@ -259,10 +262,16 @@ export default {
         if (this.isSortable) {
           if (this.columnSort === 'asc') {
             filteredData = filteredData.sort((a, b) => {
+              if (typeof a[this.columnSelector] === 'number') {
+                return b[this.columnSelector] - a[this.columnSelector]
+              }
               return a[this.columnSelector].toString().localeCompare(b[this.columnSelector], 'en', { sensitivity: 'base' })
             })
           } else if (this.columnSort === 'desc') {
             filteredData = filteredData.sort((a, b) => {
+              if (typeof a[this.columnSelector] === 'number') {
+                return a[this.columnSelector] - b[this.columnSelector]
+              }
               return b[this.columnSelector].toString().localeCompare(a[this.columnSelector], 'en', { sensitivity: 'base' })
             })
           }
