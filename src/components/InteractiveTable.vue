@@ -247,10 +247,7 @@ export default {
             return Object.values(row).reduce((acc, cell) => {
               if (!acc) {
                 if (cell) {
-                  if (typeof cell === 'number') {
-                    cell = cell.toString()
-                  }
-                  return cell.toLowerCase().includes(this.searchQuery.toLowerCase())
+                  return String(cell).toLowerCase().includes(this.searchQuery.toLowerCase())
                 }
                 return false
               }
