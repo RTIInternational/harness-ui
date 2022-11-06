@@ -7,7 +7,6 @@
         :data-toggle="collapse ? 'collapse' : ''"
         :href="collapse ?  '#harness-ui-checkbox-collapse-' + filter.key : ''"
         :role="collapse ? 'button' : ''"
-        @click="collapsed = !collapsed"
       >
         <span v-html="filter.label" />
         <button
@@ -15,7 +14,6 @@
           :data-toggle="collapse ? 'collapse' : ''"
           :href="collapse ?  '#harness-ui-checkbox-collapse-' + filter.key : ''"
           :role="collapse ? 'button' : ''"
-          @click="collapsed = !collapsed"
           v-if="collapse"
           aria-expanded="false"
           aria-label="Collapse Toggle"
@@ -30,7 +28,6 @@
        :href="collapse ?  '#harness-ui-checkbox-collapse-' + filter.key : ''"
        role="button"
        class="harness-ui-checkboxgroup-collapse-label"
-       @click="collapsed = !collapsed"
        >
         <span v-if=" collapse && getFilter(filter.key).length === getOptionsForFilter(filter.key).length">
           (All Selected)
@@ -68,7 +65,6 @@
             :href="collapse ?  '#harness-ui-checkbox-collapse-' + filter.key : ''"
             :role="collapse ? 'button' : ''"
             :for="filter.key"
-            @click="collapsed = !collapsed"
           >
             <span v-html="filter.label" />
             <button
@@ -76,7 +72,6 @@
               :data-toggle="collapse ? 'collapse' : ''"
               :href="collapse ?  '#harness-ui-checkbox-collapse-' + filter.key : ''"
               :role="collapse ? 'button' : ''"
-              @click="collapsed = !collapsed"
               v-if="collapse"
               aria-expanded="false"
               aria-label="Collapse Toggle"
@@ -93,7 +88,6 @@
             data-toggle="collapse"
             :href="'#harness-ui-checkbox-collapse-' + filter.key"
             role="button"
-            @click="collapsed = !collapsed"
           >
             <span v-if=" collapse && getFilter(filter.key).length === getOptionsForFilter(filter.key).length">
               (All Selected)
@@ -147,6 +141,8 @@
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
 import CheckboxPartial from './partials/CheckboxPartial'
+import $ from 'jquery'
+import 'bootstrap'
 export default {
   name: 'harness-ui-checkboxgroup',
   mixins: [inputProps, inputFilter],
@@ -163,6 +159,20 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    }
+  },
+  mounted () {
+    if (this.collapse) {
+      // adding event listener that closes the collapse
+      // when clicking anywhere but the checkboxes themselves
+      document.addEventListener('click', (e) => {
+        if (!e.target.id.includes(this.filter.key)) {
+          $(`#harness-ui-checkbox-collapse-${this.filter.key}`).collapse('hide')
+        }
+      })
+      // lifecycling the vue attribute used for the chevron along with bootstrap
+      $(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('hide.bs.collapse', () => { this.collapsed = true })
+      $(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('show.bs.collapse', () => { this.collapsed = false })
     }
   }
 }
