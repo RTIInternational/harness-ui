@@ -141,8 +141,6 @@
 import inputProps from '../mixins/inputProps'
 import inputFilter from '../mixins/inputFilter'
 import CheckboxPartial from './partials/CheckboxPartial'
-import $ from 'jquery'
-import 'bootstrap'
 export default {
   name: 'harness-ui-checkboxgroup',
   mixins: [inputProps, inputFilter],
@@ -167,12 +165,12 @@ export default {
       // when clicking anywhere but the checkboxes themselves
       document.addEventListener('click', (e) => {
         if (!e.target.id.includes(this.filter.key)) {
-          $(`#harness-ui-checkbox-collapse-${this.filter.key}`).collapse('hide')
+          window.$(`#harness-ui-checkbox-collapse-${this.filter.key}`).collapse('hide')
         }
       })
       // lifecycling the vue attribute used for the chevron along with bootstrap
-      $(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('hide.bs.collapse', () => { this.collapsed = true })
-      $(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('show.bs.collapse', () => { this.collapsed = false })
+      window.$(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('hide.bs.collapse', () => { this.collapsed = true })
+      window.$(`#harness-ui-checkbox-collapse-${this.filter.key}`).on('show.bs.collapse', () => { this.collapsed = false })
     }
   }
 }
